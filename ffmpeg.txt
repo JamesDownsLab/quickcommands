@@ -1,0 +1,11 @@
+Merging a list of videos:
+ffmpeg -f concat -safe 0 -i fileList.txt -c copy output
+
+Resample the size of a video
+ffmpeg -i file -filter:v scale=width:-1 -c:a copy output
+
+Get a portion of video
+ffmpeg -ss 00:00:00 -t 00:00:02 -i input output
+
+Add text to video that uses the frame number in an expression
+ffmpeg -i input -vf "drawtext=fontfile=Arial.ttf: text='%{eif\\n/25+451\\:d}': start_number=1: x=(w-tw)/2: y=h-(2*lh): fontcolor=black: fontsize=20: box=1: boxcolor=white: boxborderw=5" -c:a copy output
