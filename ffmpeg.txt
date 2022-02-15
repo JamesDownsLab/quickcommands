@@ -9,3 +9,6 @@ ffmpeg -ss 00:00:00 -t 00:00:02 -i input output
 
 Add text to video that uses the frame number in an expression
 ffmpeg -i input -vf "drawtext=fontfile=Arial.ttf: text='%{eif\\n/25+451\\:d}': start_number=1: x=(w-tw)/2: y=h-(2*lh): fontcolor=black: fontsize=20: box=1: boxcolor=white: boxborderw=5" -c:a copy output
+
+Put 4 videos into a 2x2 grid
+ffmpeg -i input1 -i input2 -i input3 -i input4 -filter_complex "[0:v][1:v][2:v][3:v]xstack=inputs=4:layout=0_0|w0_0|0_h0|w0_h0[v]" -map "[v]" output
